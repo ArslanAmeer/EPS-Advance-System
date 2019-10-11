@@ -51,11 +51,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BannerMgmt\BannersHandler.cs" />
+    <Compile Include="BannerMgmt\MainBanner.cs" />
+    <Compile Include="DBContextClass.cs" />
+    <Compile Include="LocationMgmt\City.cs" />
+    <Compile Include="LocationMgmt\Country.cs" />
+    <Compile Include="LocationMgmt\LocationHandler.cs" />
+    <Compile Include="ProductMgmt\Category.cs" />
+    <Compile Include="ProductMgmt\Product.cs" />
+    <Compile Include="ProductMgmt\ProductHandler.cs" />
+    <Compile Include="ProductMgmt\ProductImages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMgmt\Converstion.cs" />
+    <Compile Include="UserMgmt\Messages.cs" />
+    <Compile Include="UserMgmt\MessagesHandler.cs" />
+    <Compile Include="UserMgmt\Role.cs" />
+    <Compile Include="UserMgmt\User.cs" />
+    <Compile Include="UserMgmt\UserHandler.cs" />
+    <Compile Include="UserMgmt\UserImage.cs" />
+    <Compile Include="WebUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\EPS-Advance-Classes-Library.dll.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\EPS-Advance-Classes-Library.csproj.CopyComplete" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\EPS-Advance-Classes-Library.dll" />
+    <Content Include="bin\Debug\EPS-Advance-Classes-Library.pdb" />
+    <Content Include="obj\Debug\EPS-Advance-Classes-Library.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\EPS-Advance-Classes-Library.dll" />
+    <Content Include="obj\Debug\EPS-Advance-Classes-Library.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
