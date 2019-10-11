@@ -173,6 +173,12 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EPS-Advance-Classes-Library\EPS-Advance-Classes-Library.csproj">
+      <Project>{139179ea-e0e9-444e-9c43-e5a9d5b6caf4}</Project>
+      <Name>EPS-Advance-Classes-Library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

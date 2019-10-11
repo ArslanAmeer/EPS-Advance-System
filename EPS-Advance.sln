@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EPS-Advance", "EPS-Advance\EPS-Advance.vbproj", "{61CD8199-5D18-425C-BC20-C3F324DF31B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPS-Advance-Classes-Library", "EPS-Advance-Classes-Library\EPS-Advance-Classes-Library.csproj", "{139179EA-E0E9-444E-9C43-E5A9D5B6CAF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{61CD8199-5D18-425C-BC20-C3F324DF31B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CD8199-5D18-425C-BC20-C3F324DF31B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CD8199-5D18-425C-BC20-C3F324DF31B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139179EA-E0E9-444E-9C43-E5A9D5B6CAF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139179EA-E0E9-444E-9C43-E5A9D5B6CAF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139179EA-E0E9-444E-9C43-E5A9D5B6CAF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139179EA-E0E9-444E-9C43-E5A9D5B6CAF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
