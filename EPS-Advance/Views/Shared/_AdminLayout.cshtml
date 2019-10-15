@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/myicon.ico" type="image/x-icon" />
+    <title>@ViewBag.Title - EPS</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/imagepreviewer.min.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <style type="text/css">
+
+        .card img {
+            object-fit: none;
+            object-position: center;
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .card {
+            width: 300px;
+        }
+
+        .card-img-overlay {
+            /*margin-top: 50%;*/
+            padding: 0px;
+            /*margin-bottom: 10%;*/
+            position: relative;
+            /*top: -50px;
+            bottom: -17px;*/
+        }
+
+        .bg-blur {
+            background-color: rgba(0,0,0, 0.4);
+            padding: 10px;
+        }
+
+        .city-name {
+            margin-bottom: 0px;
+        }
+
+        .item-image-thumb {
+            max-width: 75px;
+            height: 50px;
+            border-width: 1px !important;
+        }
+
+        .item-image-thumb-active {
+            max-width: 75px;
+            height: 50px;
+            border-width: 3px !important;
+        }
+
+        .item-image-view-screen {
+            width: 100%;
+            height: 50%;
+            /*overflow: hidden;*/
+            background-color: rgba(0,0,0, 0.1);
+        }
+
+            .item-image-view-screen img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+        }
+
+        .info-btn {
+            width: 20px;
+            height: 20px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    @Html.Partial("_NavBar")
+    <div class="container body-content">
+        <div class="jumbotron-fluid mt-5">
+            <div class="row justify-content-around">
+                <section class="col-3 user-list">
+                    <ul class="list-group mt-3 mb-4">
+                        <li><a href="@Url.Action("ManageAds","Admin")" class="list-group-item">Manage Ads</a></li>
+                        <li><a href="@Url.Action("ManageUsers","Admin")" class="list-group-item">Manage Users</a></li>
+                    </ul>
+                </section>
+
+                @* RIGHT Secrion *@
+                <section class="col-9" style="border-radius: 0.6rem;">
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - EPS | <a href="https://www.arslanameer.com">Arslan Ameer </a> - All Rights Reserved</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script type="text/javascript">
+        $("#info-btn-popover").popover();
+        GetConvoConut();
+        setInterval(() => { GetConvoConut() }, 10000);
+        function GetConvoConut() {
+            debugger;
+            $.ajax({
+                url: "/User/ConversationCount/",
+                type: "GET",
+                success: (result) => {
+                    $("#convoCount").text(result);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

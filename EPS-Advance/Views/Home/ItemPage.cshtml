@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Item Name";
+}
+<h2 class="pt-5">Samsung Galaxy Note 9</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Mobile Phones</p>
+        </div>
+        <div class="col">
+            <p class="float-right" title="Date of posting this item">01/02/2019</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        @* Left Column *@
+        <div class="col-12 col-md-8 container border border-primary">
+            @* Image *@
+            <div class="border border-primary rounded item-image-view-screen mt-3 p-1">
+                <img src="~/Content/img/Products/note9b.jpg" class="bg-primary" />
+            </div>
+            @* Thumbnail of other images as pagination *@
+            <nav aria-label="Other images" class="mt-1">
+                <ul class="pagination pagination-lg">
+                    <li class="page-item">
+                        <a class="page-link bg-white p-2" href="#">
+                            <img class="item-image-thumb-active border border-primary" src="~/Content/img/Products/note9b.jpg" />
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link bg-white p-2" href="#">
+                            <img class="item-image-thumb border border-primary" src="~/Content/img/Products/note9a.png" />
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link bg-white p-2" href="#">
+                            <img class="item-image-thumb border border-primary" src="~/Content/img/Products/note9c.jpg" />
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link bg-white p-2" href="#">
+                            <img class="item-image-thumb border border-primary" src="~/Content/img/Products/note9d.jpg" />
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <hr />
+            @* Description *@
+            <h4 class="mt-4">Description</h4>
+            <p>--- Details of item ---</p>
+            <p>As soon as a new smartphone’s launching date comes within a specific timeframe, the rumour mill begins to spin fast and throws out a lot to keep the fans curious. Same is the case with the upcoming Galaxy Note 9 and the smartphone is expected to come-out looking exactly like its predecessor, the Galaxy Note 8, with an expected price in excess of Rs. 110,000.</p>
+        </div>
+        @* Right Column *@
+        <div class="col-6 col-md-4 border border-primary border-left-0">
+            <h5 class="flex-wrap mt-3">Samsung Galaxy Note 9</h5>
+            <input type="image" src="~/Content/img/Iconic/share.svg" class="btn btn-outline-primary btn-icon mt-1 mr-1" alt="Share" title="Share" />
+            <input type="image" src="~/Content/img/Iconic/heart.svg" class="btn btn-outline-primary btn-icon mt-1" alt="Favorite" title="Mark this item as Favorite" />
+            <p class="pt-2 h6">
+                <b>Price Range:</b>
+                Rs. 100000 to 165000
+                <img src="~/Content/img/Iconic/info.svg"
+                     class="btn btn-outline-primary rounded-circle info-btn align-text-top ml-1"
+                     id="info-btn-popover"
+                     data-toggle="popover"
+                     data-trigger="hover"
+                     data-placement="top"
+                     data-content="The Price Range shows worth of item in money." />
+            </p>
+            <div class="border p-1">
+                <p class="h3">Seller</p>
+                <div class="container">
+                    <div class="row">
+                        <a class="col-auto text-right" href="#"><img width="80" height="80" src="~/Content/img/userimage.png" /></a>
+                        <a class="col-auto pl-0" href="#"><p class="h5">Capt. Hassan</p></a>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-primary btn-block m-2">Send Message</button>
+                    </div>
+                </div>
+                <p class="h3 mt-2">Location</p>
+                <div class="container">
+                    <div class="row">
+                        <p class="col-auto mb-0">University Of Gujrat, Sub Campus, Lahore</p>
+                    </div>
+                    <div class="row">
+                        <img src="~/Content/img/map.png" alt="map" width="600" height="300" />
+                        @*<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13597.389567635799!2d74.4189131!3d31.5695202!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x696d1a0f527d89b9!2sUniversity+of+Gujrat+Lahore+Sub+Campus!5e0!3m2!1sen!2s!4v1551818153656" width="600" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

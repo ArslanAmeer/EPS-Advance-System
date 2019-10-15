@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Messages";
+}
+
+@section styles
+{
+    <style type="text/css">
+        .user-list {
+            height: 300px;
+            overflow-y: auto;
+            border-radius: 0.6rem;
+        }
+
+        .convo {
+            height: 250px;
+            overflow-y: auto;
+            border-radius: 0.6rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .mymsg {
+            background-color: transparent;
+            border: 1px solid #6CC3D5;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+
+        .usermsg {
+            background-color: #6CC3D5;
+            color: white;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+
+        .msg-area {
+            height: 50px
+        }
+
+        input {
+            max-width: 100% !important;
+        }
+    </style>
+}
+
+<div class="jumbotron mt-5">
+    <h2>Messages</h2>
+    <hr />
+    <div class="row justify-content-around">
+        @* LEFT Section *@
+        <section class="col-4 border border-primary user-list">
+            <ul class="list-group mt-3 mb-4">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <li><a href="#" class="list-group-item">User Name @i</a></li>
+                }
+            </ul>
+        </section>
+
+        @* RIGHT Secrion *@
+        <section class="col-7 border border-primary" style="border-radius: 0.6rem;">
+            <div class="convo">
+                <div class="row col-12">
+                    <span class="mymsg">Hello</span>
+                </div>
+                <div class="row col-12 justify-content-end">
+                    <span class="usermsg">Hi!</span>
+                </div>
+                <div class="row col-12">
+                    <span class="mymsg">How are you?</span>
+                </div>
+                <div class="row col-12 justify-content-end">
+                    <span class="usermsg">Doing Great! You Tell</span>
+                </div>
+                <div class="row col-12">
+                    <span class="mymsg">Hello</span>
+                </div>
+                <div class="row col-12 justify-content-end">
+                    <span class="usermsg">Hi!</span>
+                </div>
+                <div class="row col-12">
+                    <span class="mymsg">How are you?</span>
+                </div>
+                <div class="row col-12 justify-content-end">
+                    <span class="usermsg">Doing Great! You Tell</span>
+                </div>
+            </div>
+            <div class="msg-area border-top border-primary">
+                <div class="input-group mt-1">
+                    <input type="text" class="form-control" placeholder="Enter Message" aria-label="Enter Message" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-info" type="button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

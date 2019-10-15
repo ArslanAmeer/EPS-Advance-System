@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EPSClassLibrary.ProductMgmt.Product>
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="jumbotron mt-5">
+    <h2 class="text-center">Search Results!</h2>
+    <hr />
+    <div class="row justify-content-center">
+
+        @if (!Model.Any())
+        {
+            <h4>No Product Found!</h4>
+        }
+        else
+        {
+            foreach (var prod in Model)
+            {
+                <div class="col-auto mb-4">
+                    <a class="card-link" href="@Url.Action("ProductDetail","Product",new { Id = prod.Id})">
+                        <div class="card border-primary">
+                            <img src="@prod.Images.First().Image_Url" class="card-img-top" alt="Ad Image" />
+                            <div class="card-img-overlay"><h5 class="bg-blur text-white mb-3">Price-Range: @prod.MinPrice - @prod.MaxPrice</h5></div>
+                            <div class="card-body">
+                                <h5 class="card-title">@prod.Name</h5>
+                                @if (prod.Description.Length >= 50)
+                                {
+                                    <p class="card-text">@prod.Description.Substring(0, 49)</p>
+                                }
+                                else
+                                {
+
+                                    <p class="card-text">@prod.Description</p>
+                                }
+
+                                <p class="card-text float-left city-name"><small class="text-muted">@prod.User.CityId.Name</small></p>
+                                <p class="card-text float-right"><small class="text-muted">@prod.DateAdded</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using EPS_Advance_Classes_Library
+@using EPS_Advance_Classes_Library.UserMgmt
+@{
+    User currentUser = (User)Session[WebUtil.CURRENT_USER];
+}
+@if (currentUser != null)
+{
+    using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (currentUser.IsInRole(WebUtil.ADMIN_ROLE))
+            {
+                <li>
+                    <a href="@Url.Action("ManageAds", "Admin")" class="nav-link page-link">[ Admin Panel ]</a>
+                </li>
+            }
+            <li>
+                <a href="@Url.Action("AddProduct", "Product")" class="nav-link page-link">Post Ad</a>
+            </li>
+            <li>
+                <a href="@Url.Action("AllConverstaion", "User")" class="nav-link active position-relative"> <img src="~/Content/img/msg.png" width="25" /> <span id="convoCount" class="badge badge-danger" style="position: absolute; top: 1px; margin-left: 15px"></span> </a>
+            </li>
+            <li>
+                @Html.ActionLink("Hello " + currentUser.FullName + "!", "Profile", "User", routeValues: null, htmlAttributes: new { title = "Profile", @class = "nav-link active" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link active">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link active" })</li>
+    </ul>
+}
+

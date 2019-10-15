@@ -1,0 +1,39 @@
+﻿@using System.Web.UI.WebControls
+@{
+    var pageName = ViewContext.RouteData.Values["action"].ToString();
+}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @* Applicaiton Name *@
+        <a href="/" class="navbar-brand nav-link">EPS</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-dark mr-2">
+                @* Home *@
+                <li class="nav-item">@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "nav-link active" })</li>
+                @* About *@
+                <li class="nav-item">@Html.ActionLink("About", "About", new { controller = "Home" }, new { @class = "nav-link active" })</li>
+                @* Contact *@
+                <li class="nav-item">@Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new { @class = "nav-link active" })</li>
+            </ul>
+            @if (pageName == "Login" || pageName == "Register")
+            {
+
+            }
+            else
+            {
+                using (Html.BeginForm("Search", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                {
+                    <input name="search" class="form-control mr-1" type="search" placeholder="Search Ad" aria-label="Search Ad">
+                    <button class="btn bg-primary btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                }
+            }
+
+            <div class="ml-auto">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+</nav>
