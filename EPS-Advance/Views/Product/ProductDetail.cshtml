@@ -1,0 +1,211 @@
+﻿@using EPS_Advance_Classes_Library
+@using EPS_Advance_Classes_Library.UserMgmt
+@model EPS_Advance_Classes_Library.ProductMgmt.Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+    User currentUser = (User)Session[WebUtil.CURRENT_USER];
+}
+
+@section Styles{
+
+    <style>
+        #gMap {
+            height: 300px;
+            margin: auto;
+        }
+
+        #lightSlider ul {
+            list-style: none outside none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        #lightSlider li {
+            display: block;
+            float: left;
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        #lightSlider img {
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .gallery {
+            margin: auto
+        }
+    </style>
+}
+<br />
+<h4 class="display-4 text-center">Product Detail</h4>
+
+<h2 class="pt-5">@Model.Name</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>@Model.Category.Name</p>
+        </div>
+        <div class="col">
+            <p class="float-right" title="Date of posting this item">@Model.DateAdded</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        @* Left Column *@
+        <div class="col-12 col-md-8 container border border-primary">
+            <div class="border border-primary rounded mt-3 p-1">
+                <div class="gallery">
+                    <ul id="lightSlider">
+                        @foreach (var images in Model.Images)
+                        {
+                            <li data-thumb="@images.Image_Url">
+                                <img src="@images.Image_Url" alt="@images.Caption" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            @* Description *@
+            <h4 class="mt-4">Description</h4>
+            <p>--- Details of item ---</p>
+            <p>@Model.Description</p>
+        </div>
+        @* Right Column *@
+        <div class="col-6 col-md-4 border border-primary border-left-0">
+            <h5 class="flex-wrap mt-3">@Model.Name</h5>
+            <input type="image" src="~/Content/img/Iconic/share.svg" class="btn btn-outline-primary btn-icon mt-1 mr-1" alt="Share" title="Share" />
+            <input type="image" src="~/Content/img/Iconic/heart.svg" class="btn btn-outline-primary btn-icon mt-1" alt="Favorite" title="Mark this item as Favorite" />
+            <p class="pt-2 h6">
+                <b>Price Range:</b>
+                Rs. @Model.MinPrice to @Model.MaxPrice
+                <img src="~/Content/img/Iconic/info.svg"
+                     class="btn btn-outline-primary rounded-circle info-btn align-text-top ml-1"
+                     id="info-btn-popover"
+                     data-toggle="popover"
+                     data-trigger="hover"
+                     data-placement="top"
+                     data-content="The Price Range shows worth of item in money." />
+            </p>
+            <div class="border p-1">
+                <p class="h3">Seller</p>
+                <div class="container">
+                    <div class="row">
+                        <a class="col-auto text-right" href="#"><img width="80" height="80" src="~/Content/img/userimage.png" /></a>
+                        <span class="col-auto pl-0">
+                            <a><p class="h5">@Model.User.FullName</p></a>
+                            <br />
+                            @if (currentUser != null)
+                            {
+                                <a href="tel:@Model.User.Phone"><p class="h6">Phone: @Model.User.Phone</p></a>
+                            }
+                            else
+                            {
+                                <p class="h6">Phone: (Login to Reveal)</p>
+                            }
+                        </span>
+
+                    </div>
+
+                    @if (currentUser == null)
+                    {
+                        <div class="row">
+                            <a href="@Url.Action("Login","User")" class="btn btn-primary btn-block m-2">Login To Message</a>
+                        </div>
+                    }
+                    else if (currentUser.Id == Model.User.Id)
+                    {
+                        <div class="row">
+                            <a href="@Url.Action("UserAdManage","User", new { Id = Model.User.Id })" class="btn btn-primary btn-block m-2">Manage Ads</a>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="row">
+                            <a href="@Url.Action("Messages","User", new { Id = Model.User.Id })" class="btn btn-primary btn-block m-2">Send Message</a>
+                        </div>
+                    }
+
+                </div>
+                <p class="h3 mt-2">Location</p>
+                <div class="container">
+                    <div class="row">
+                        <p class="col-auto mb-0"> <span id="city">@Model.User.CityId.Name</span>,<span id="country">@Model.User.CityId.Country.Name</span></p>
+                    </div>
+                    <div class="row">
+                        <div id="map" style="height: 320px; width: 390px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/imagepreviewer.min.js"></script>
+    <script type="text/javascript">
+        debugger;
+        var latt, long;
+        var city = $("#city").text();
+        var country = $("#country").text();
+        var Url = "https://api.opencagedata.com/geocode/v1/json?q=" +
+            city +
+            "," +
+            country +
+            "&key=c8a048f7301c4b6c8f2ba143727f6750";
+
+        $.ajax({
+            url: Url,
+            type: "get",
+            success: function (result) {
+                console.dir(result);
+                latt = parseFloat(result.results[0].geometry.lat);
+                long = parseFloat(result.results[0].geometry.lng);
+                var location = { lat: latt, lng: long };  // Latitude and Longitude (coordinates of your location)
+                var map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 10,   // Map Zoom Leave
+                    center: location, // To get location on center on map area on page load
+                    gestureHandling: 'cooperative'  // 'cooperative' is strict on zoom-scrolling, 'greedy' is always zoom on scroll
+                });
+                var cityCircle = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: location,
+                    radius: 10000
+                });
+
+            }
+        });
+        $('#lightSlider').lightSlider({
+            gallery: true,
+            item: 1,
+            loop: true,
+            slideMargin: 1,
+            thumbItem: 10,
+            speed: 800,
+            auto: false,
+            pause: 3000,
+            adaptiveHeight: true
+        });
+        $('li>img')
+            .wrap('<span style="display:inline-block"></span>')
+            .css('display', 'block')
+            .parent()
+            .zoom({
+                magnify: 1.3
+            });
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcxaGtyOECj6z8NuhWAtly4YqexZrFsbU">
+    </script>
+}
