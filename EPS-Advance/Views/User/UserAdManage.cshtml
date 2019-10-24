@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EPS_Advance_Classes_Library.ProductMgmt.Product>
+
+@{
+    ViewBag.Title = "UserAdManage";
+}
+
+<h2>UserAdManage</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Condition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UserEditAd", new { id = item.Id }) |
+                @Html.ActionLink("Details", "UserAdDetail", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "UserAdDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

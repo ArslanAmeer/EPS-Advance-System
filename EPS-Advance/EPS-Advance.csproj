@@ -191,9 +191,16 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DDViewModel.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ModelHelper.cs" />
+    <Compile Include="Models\ProductSummaryModel.cs" />
+    <Compile Include="Models\recoveryEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +218,18 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\User\AllConverstaion.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Messages.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\ProfileWithInterests.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\UserAdDelete.cshtml" />
+    <Content Include="Views\User\UserAdDetail.cshtml" />
+    <Content Include="Views\User\UserAdManage.cshtml" />
+    <Content Include="Views\User\UserEditAd.cshtml" />
+    <Content Include="Views\User\UserManage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -220,7 +239,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EPS-Advance-Classes-Library\EPS-Advance-Classes-Library.csproj">

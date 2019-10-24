@@ -1,0 +1,146 @@
+﻿@model EPS_Advance_Classes_Library.UserMgmt.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+@section styles
+{
+    <style type="text/css">
+
+        .dropdownml {
+            padding: 5px;
+            border: solid 1px grey;
+            color: #808080;
+        }
+
+        .dropdownerr {
+            padding: 5px;
+            border: solid 1px red;
+        }
+    </style>
+}
+
+<h2 class="pt-5">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal well", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    if (ViewBag.msg != null)
+    {
+        <div class="alert alert-warning alert- fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <i> @ViewBag.msg </i>
+        </div>
+    }
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                </div>
+            </div>
+            @*-----------------------DROP DOWN ALERT-------------------------*@
+            <div class="form-group" style="width:290px; margin-left:10px">
+                <div id="countrydiv">
+                    @Html.DropDownList("CountryList", (IEnumerable<SelectListItem>)ViewBag.CountryList, "- Country -", new { @class = "form-control", style = "Width:130px; Float: Left", required = "required" })
+                </div>
+                <div id="citydiv">
+
+                </div>
+                @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+            </div>
+            @*------------------------------------------------*@
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.BirthDate, new { @type = "date", @class = "form-control", placeholder = "mm/dd/yyyy" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FullAddress, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.FullAddress, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FullAddress, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SecurityQuestion, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <select id="sqQues" name="sqQues" class="form-control">
+                        <option value="Favrouite Color">Favrouite Color</option>
+                        <option value="Favrouite City">Favrouite City</option>
+                        <option value="First Teacher Name">First Teacher Name</option>
+                        <option value="First Car">First Car</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SecurityAnswer, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SecurityAnswer, new { @class = "form-control", required = "required" })
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $("#CountryList").change(function () {
+            var cityid = $(this).children("option:selected").val();
+            $.ajax(
+                {
+                    url: "/User/CityLists/" + cityid,
+                    type: "get",
+                    success: function (result) {
+                        $("#citydiv").html(result);
+                    }
+                });
+
+        });
+    </script>
+}
+
+

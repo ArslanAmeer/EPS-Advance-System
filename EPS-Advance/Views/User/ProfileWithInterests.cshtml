@@ -1,0 +1,83 @@
+﻿@using EPS_Advance_Classes_Library
+@using EPS_Advance_Classes_Library.ProductMgmt
+@using EPS_Advance_Classes_Library.UserMgmt
+
+@{
+    ViewBag.Title = "Profile With Interest";
+    List<Product> products = ViewBag.products;
+    List<Category> categories = ViewBag.categories;
+    User user = (User)Session[WebUtil.CURRENT_USER];
+}
+<br />
+<h2 class="pt-5 text-center">Profile</h2>
+<br />
+<div class="container-fluid">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="row">
+            @* Left column*@
+            <div class="col-4 col-md-4 border border-primary border-right-0">
+                <div class="border-left border-right border-bottom border-primary m-2 p-1">
+                    <p class="h4">@user.FullName</p>
+                    <div class="container">
+                        <img class="m-3 w-100 ml-auto" src="~/Content/img/userimage.png" />
+                        <p class="h5">Interest:</p>
+                        <p class="h6">
+                            @foreach (var c in categories)
+                            {
+                                <a href="@Url.Action("ProfileWithInterests", "User",new { id = c.Id})">
+                                    <span>#@c.Name</span>
+                                </a>
+                            }
+                        </p>
+                        <div class="row">
+                            @Html.ActionLink("Manage Account", "UserManage", "User", routeValues: null, htmlAttributes: new { title = "Profile", @class = "btn btn-outline-primary m-3 w-100 nav-link active" })
+                            @Html.ActionLink("Manage Ads", "UserAdManage", "User", routeValues: null, htmlAttributes: new { title = "AdManage", @class = "btn btn-outline-dark m-3 w-100 nav-link active" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Right column*@
+            <div class="col-12 col-md-8 container border border-primary">
+                <p class="h4 m-2 p-1">Ads:</p>
+                <div class="row">
+                    @if (products.Count() != 0)
+                    {
+                        foreach (var prod in products)
+                        {
+                            <div class="col-auto mb-4">
+                                <a class="card-link" href="@Url.Action("ProductDetail", "Product", new {Id = prod.Id})">
+                                    <div class="card border-primary">
+                                        <img src="@prod.Images.First().Image_Url" class="card-img-top" alt="Ad Image" style="object-fit: cover"  />
+                                        <div class="card-img-overlay"><h5 class="bg-blur text-white mb-3">Price-Range: @prod.MinPrice - @prod.MaxPrice</h5></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">@prod.Name</h5>
+                                            @if (prod.Description.Length >= 50)
+                                            {
+                                                <p class="card-text">@prod.Description.Substring(0, 49)</p>
+                                            }
+                                            else
+                                            {
+
+                                                <p class="card-text">@prod.Description</p>
+                                            }
+
+                                            <p class="card-text float-left city-name"><small class="text-muted">@prod.User.CityId.Name</small></p>
+                                            <p class="card-text float-right"><small class="text-muted">@prod.DateAdded</small></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h3 class="text-center">No Product Available in Your Interest</h3>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

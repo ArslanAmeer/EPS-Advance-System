@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Messages";
+}
+
+@section styles
+{
+    <style type="text/css">
+        .user-list {
+            height: 300px;
+            overflow-y: auto;
+            border-radius: 0.6rem;
+        }
+
+        .convo {
+            height: 250px;
+            overflow-y: auto;
+            border-radius: 0.6rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .mymsg {
+            background-color: transparent;
+            border: 1px solid #6CC3D5;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+
+        .usermsg {
+            background-color: #6CC3D5;
+            color: white;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+
+        .msg-area {
+            height: 50px
+        }
+
+        input {
+            max-width: 100% !important;
+        }
+    </style>
+}
+
+<div class="jumbotron mt-5">
+    <h2>Messages</h2>
+    <hr />
+    <div class="row justify-content-around">
+        @* LEFT Section *@
+        <section class="col-4 border border-primary user-list">
+            <ul class="list-group mt-3 mb-4">
+                <li><a href="#" class="list-group-item">@ViewBag.OtherUsername</a></li>
+                @*@for (int i = 0; i < 4; i++)
+                    {
+                        <li><a href="#" class="list-group-item">User Name @i</a></li>
+                    }*@
+            </ul>
+        </section>
+
+        @* RIGHT Secrion *@
+        <section class="col-7 border border-primary" style="border-radius: 0.6rem;">
+            <div class="convo" id="convo">
+            </div>
+            <div class="msg-area border-top border-primary">
+                <div class="input-group mt-1">
+                    <input id="msg" type="text" class="form-control" placeholder="Enter Message" aria-label="Enter Message" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="sndmsg" class="btn btn-outline-info" type="button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div id="otherUser" class="cS-hidden text-hide">@ViewBag.ToMsg</div>
+<div id="currentUser" class="cS-hidden text-hide">@ViewBag.FromMsg</div>
+<div id="convoId" class="cS-hidden text-hide">@ViewBag.convoId</div>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(() => {
+            var rcvId = parseInt($("#otherUser").text());
+            var sndId = parseInt($("#currentUser").text());
+            var convoId = parseInt($("#convoId").text());
+            GetMessages();
+
+            var d = $('#convo');
+            d.animate({ scrollTop: d.prop('scrollHeight') }, 10);
+
+            $("#sndmsg").click(() => {
+                var msg = $("#msg").val();
+                var msgData = new Object();
+                msgData.Id = null;
+                msgData.Message = msg;
+                msgData.SenderId = sndId;
+                msgData.ReceiverId = rcvId;
+                msgData.TimeOfMsg = null;
+                var convo = new Object();
+                convo.Id = convoId;
+                msgData.Converstion = convo;
+                AddMessage(msgData);
+            });
+
+            $('#msg').keypress(function (e) {
+                var key = e.which;
+                if (key == 13)  // the enter key code
+                {
+                    var msg = $("#msg").val();
+                    var msgData = new Object();
+                    msgData.Id = null;
+                    msgData.Message = msg;
+                    msgData.SenderId = sndId;
+                    msgData.ReceiverId = rcvId;
+                    msgData.TimeOfMsg = null;
+                    var convo = new Object();
+                    convo.Id = convoId;
+                    msgData.Converstion = convo;
+                    AddMessage(msgData);
+                    return false;
+                }
+            });
+
+            setInterval(() => {
+                GetMessages();
+            }, 3000);
+
+        });
+
+        function GetMessages() {
+            var rcvId = parseInt($("#otherUser").text());
+            //var rcvId = parseInt(12);
+            var sndId = parseInt($("#currentUser").text());
+            var html = "";
+            var url = "/User/GetMessages/?rcvId=" + rcvId;
+            $.ajax(
+                {
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (result) {
+                        var list = result.list;
+                        $.each(list,
+                            function (index, value) {
+                                if (parseInt(value.SenderId) === parseInt(sndId) &&
+                                    parseInt(value.ReceiverId) === parseInt(rcvId)) {
+                                    html += "<div class='row col-12'><span class='mymsg'>" +
+                                        value.Message +
+                                        "</span></div>";
+                                } else if (value.SenderId == rcvId && value.ReceiverId == sndId) {
+                                    html += "<div class='row col-12 justify-content-end'><span class='usermsg'>" +
+                                        value.Message +
+                                        "</span></div>";
+                                }
+                            });
+                        $("#convo").html(html);
+                        var d = $('#convo');
+                        d.animate({ scrollTop: d.prop('scrollHeight') }, 10);
+                    },
+                    error: function (e) {
+                        alert("Error:Unable to load data from server");
+                    }
+                });
+        }
+
+        function AddMessage(msgData) {
+            $.ajax(
+                {
+                    url: "/User/AddMessages/",
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(msgData),
+                    success: function (result) {
+                        $("#msg").val("");
+                        //var newhtml = "<div class='row col-12'><span class='mymsg'>" + value.Message + "</span></div>";
+                        //location.reload();
+                        GetMessages();
+                        var d = $('#convo');
+                        d.animate({ scrollTop: d.prop('scrollHeight') }, 10);
+
+                    },
+                    error: function (e) {
+                        alert("Error:Unable to load data from server");
+                    }
+                });
+        }
+
+    </script>
+}

@@ -1,0 +1,117 @@
+﻿@model EPS_Advance_Classes_Library.ProductMgmt.Product
+
+@{
+    ViewBag.Title = "UserEditAd";
+}
+<br />
+<h2 class="text-center">User Edit Ad</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @class = "form-control", id = "minpr", placeholder = "500", step = "50", min = "500", name = "minpr", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.MinPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaxPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @class = "form-control", id = "maxpr", placeholder = "5000", step = "50", min = "5000", name = "maxpr", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.MaxPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control", type = "number", min = "3", max = "10", id = "name", placeholder = "9", name = "condition", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 10, cols = 115, draggable = "false" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateAdded, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Ads", "UserAdManage")
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var number = document.querySelector('#minpr');
+        number.onkeydown = function (e) {
+            if (!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+                return false;
+            }
+        };
+        var number2 = document.querySelector('#maxpr');
+        number2.onkeydown = function (e) {
+            if (!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+                return false;
+            }
+        };
+
+        $("#minpr, #maxpr").change(function (e) {
+            var lil = parseInt($("#minpr").val(), 10);
+            var big = parseInt($("#maxpr").val(), 10);
+            if (lil > big) {
+                var targ = $(e.target);
+                if (targ.is("#maxpr")) {
+                    alert("Maximum Price must be greater than Minimum Price");
+                    $('#maxpr').val(0);
+                }
+                if (targ.is("#minpr")) {
+                    alert("Minimum Price must be less than Maximum Price");
+                    $('#minpr').val(0);
+                }
+            }
+        });
+    </script>
+}

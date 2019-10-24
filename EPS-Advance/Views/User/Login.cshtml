@@ -1,0 +1,70 @@
+﻿@model EPS_Advance.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2 class="pt-5">@ViewBag.Title</h2>
+<hr />
+@if (ViewBag.msg != null)
+{
+    <div class="alert alert-light fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong> @ViewBag.msg </strong>
+    </div>
+}
+
+<div class="row jumbotron">
+    <div class="col-md-6">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LoginId, new { @class = "col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.LoginId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-primary" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>
+            }
+        </section>
+    </div>
+    <div class="col-md-6">
+        <img src="~/Content/img/LOGO.png" alt="EPS-LOGO" />
+    </div>
+</div>
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script type="text/javascript">
+        $(".alert").delay(5000).fadeOut();
+    </script>
+}
+
