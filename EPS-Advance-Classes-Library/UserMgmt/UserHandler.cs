@@ -142,7 +142,6 @@ namespace EPS_Advance_Classes_Library.UserMgmt
 
                 oldUser.FullName = newUser.FullName;
                 oldUser.LoginID = newUser.LoginID;
-                oldUser.Password = newUser.Password;
                 oldUser.BirthDate = newUser.BirthDate;
                 oldUser.Email = newUser.Email;
                 oldUser.FullAddress = newUser.FullAddress;
@@ -155,6 +154,7 @@ namespace EPS_Advance_Classes_Library.UserMgmt
 
             _db.Entry(oldUser.Role).State = EntityState.Unchanged;
             _db.Entry(oldUser.CityId).State = EntityState.Unchanged;
+            _db.Entry(oldUser).State = EntityState.Modified;
             _db.SaveChanges();
         }
 
