@@ -76,7 +76,7 @@
             <p>@Model.Description</p>
         </div>
         @* Right Column *@
-        <div class="col-6 col-md-4 border border-primary border-left-0">
+        <div class="col-12 col-md-4 border border-primary border-left-0">
             <h5 class="flex-wrap mt-3">@Model.Name</h5>
             <input type="image" src="~/Content/img/Iconic/share.svg" class="btn btn-outline-primary btn-icon mt-1 mr-1" alt="Share" title="Share" />
             <input type="image" src="~/Content/img/Iconic/heart.svg" class="btn btn-outline-primary btn-icon mt-1" alt="Favorite" title="Mark this item as Favorite" />
@@ -91,10 +91,10 @@
                      data-placement="top"
                      data-content="The Price Range shows worth of item in money." />
             </p>
-            <div class="border p-1">
+            <div class="border p-1 text-center text-md-left">
                 <p class="h3">Seller</p>
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center justify-content-md-start"    >
                         <a class="col-auto text-right" href="#"><img width="80" height="80" src="~/Content/img/userimage.png" /></a>
                         <span class="col-auto pl-0">
                             <a><p class="h5">@Model.User.FullName</p></a>
