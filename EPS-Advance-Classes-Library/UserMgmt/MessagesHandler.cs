@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EPS_Advance_Classes_Library.UserMgmt
 {
-    public class MessagesHandler
+    public class MessagesHandler : IDisposable
     {
         private readonly DBContextClass _db = new DBContextClass();
 
@@ -71,5 +71,18 @@ namespace EPS_Advance_Classes_Library.UserMgmt
             }
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+        }
     }
 }
