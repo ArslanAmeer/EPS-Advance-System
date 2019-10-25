@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EPS_Advance_Classes_Library.UserMgmt.User>
+
+@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Manage All Users</h2>
+<hr />
+<table class="table table-sm table-bordered table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UserEdit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "UserDetail", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "UserDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

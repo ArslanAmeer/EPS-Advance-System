@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -233,6 +234,15 @@
     <Content Include="Views\User\UserManage.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Admin\AdDelete.cshtml" />
+    <Content Include="Views\Admin\AdDetails.cshtml" />
+    <Content Include="Views\Admin\AdEdit.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Admin\ManageAds.cshtml" />
+    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\UserDelete.cshtml" />
+    <Content Include="Views\Admin\UserDetail.cshtml" />
+    <Content Include="Views\Admin\UserEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

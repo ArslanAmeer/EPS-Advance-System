@@ -1,0 +1,87 @@
+﻿@model EPS_Advance_Classes_Library.ProductMgmt.Product
+
+@{
+    ViewBag.Title = "AdDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Ad Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ad By User:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Condition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+        <dd>
+            @foreach (var item in Model.Images)
+            {
+                <img src="@Url.Content(item.Image_Url)" alt="images" height="150" width="150" />
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "AdEdit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ManageAds")
+</p>

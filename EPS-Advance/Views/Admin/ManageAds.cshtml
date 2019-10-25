@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EPS_Advance_Classes_Library.ProductMgmt.Product>
+
+@{
+    /**/
+
+    ViewBag.Title = "ManageAds";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Manage All Ads</h2>
+<hr />
+<table class="table table-sm table-bordered table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Condition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Available)
+        </th>
+        <th>
+            Ad By User
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.Name.Length >= 15)
+            {
+                <td>
+                    @item.Name.Substring(0, 15)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MinPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            @if (item.Description.Length >= 10)
+            {
+                <td>
+                    @item.Description.Substring(0, 10)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "AdEdit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "AdDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "AdDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
