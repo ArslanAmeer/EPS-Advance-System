@@ -69,7 +69,8 @@
                 </div>
             </div>
             @*-----------------------DROP DOWN ALERT-------------------------*@
-            <div class="form-group" style="width:290px; margin-left:10px">
+            <div class="form-group" style="width:290px">
+                <label>Country</label>
                 <div id="countrydiv">
                     @Html.DropDownList("CountryList", (IEnumerable<SelectListItem>)ViewBag.CountryList, "- Country -", new { @class = "form-control", style = "Width:130px; Float: Left", required = "required" })
                 </div>

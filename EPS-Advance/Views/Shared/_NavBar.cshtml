@@ -26,8 +26,10 @@
                 {
                     using (Html.BeginForm("Search", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
-                        <input name="search" class="form-control mr-1" type="search" placeholder="Search Ad" aria-label="Search Ad">
-                        <button class="btn bg-primary btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        <div class="d-flex">
+                            <input name="search" class="form-control mr-1" type="search" placeholder="Search Ad" aria-label="Search Ad">
+                            <button class="btn bg-primary btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </div>
                     }
                 }
 
@@ -37,5 +39,5 @@
             </div>
         </div>
     </nav>
-    <h3 class="text-center" style="background-color:#dd5143; margin:0; width:100%; position: fixed; top:55px; z-index:99999"> DEMO / TESTING </h3>
+    @*<h3 class="text-center" style="background-color:#dd5143; margin:0; width:100%; position: fixed; top:55px; z-index:99999"> DEMO / TESTING </h3>*@
     
