@@ -1,4 +1,4 @@
-# EPS System (Exchange Prodyct System) 🏔
+# EPS System (Exchange Product System) 🏔
 EPS 🕸 Exchange Product System - Online Product Exchange 🛒Site made with Asp.Net MVC Technology using C#, Bootstrap, jQuery, Ajax, HTML5, CSS3, SQL, and Entity Framework.
 
 **_Has:_** Admin panel ⚙ through which one can manage 💻 registered users 👷‍♂️ and there respective ads 🎊.
